@@ -23,16 +23,16 @@ function App() {
               </Step>
               <Form>
                 <FillBox>
-                  <label htmlFor="name">Name</label>
-                  <input type="text" id="name" />
+                  <Label htmlFor="name">Name</Label>
+                  <Input type="text" id="name" />
                 </FillBox>
                 <FillBox>
-                  <label htmlFor="email">Email Address</label>
-                  <input type="text" id="email" />
+                  <Label htmlFor="email">Email Address</Label>
+                  <Input type="text" id="email" />
                 </FillBox>
                 <FillBox>
-                  <label htmlFor="phone">Phone Number</label>
-                  <input type="text" id="phone" />
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <Input type="text" id="phone" />
                 </FillBox>
               </Form>
             </Card>
@@ -54,6 +54,7 @@ const Main = styled.div`
   height: 100%;
   background-repeat: no-repeat;
   background-size: 100%;
+  /* display: flex; */
 `;
 
 const Process = styled.div`
@@ -61,7 +62,8 @@ const Process = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 34px;
-  padding: 34px 16px;
+  /* padding: 34px 16px; */
+  padding: 34px 16px 58px 16px;
 `;
 
 const Option = styled.div`
@@ -159,4 +161,20 @@ const FillBox = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 3px;
+`;
+
+const Input = styled.input`
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color, #d6d9e6);
+  background: var(--white);
+`;
+
+const Label = styled.label`
+  color: var(--marineBlue);
+  font-family: Ubuntu;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 `;
