@@ -1,10 +1,16 @@
+import { useNumber } from "../store/useNumber";
 import styled from "styled-components";
+// import { persist, devtools } from "zustand/middleware";
+// import nextStep from "./NextStep";
 
 function Pagination() {
+  const { step, nextStep } = useNumber();
+  // const step = useNumber((state) => state.step);
+
   return (
     <NumberBox>
-      <Number>1</Number>
-      <Number>2</Number>
+      <Number onClick={() => nextStep(1)}>{step}</Number>
+      <Number>2 </Number>
       <Number>3</Number>
       <Number>4</Number>
     </NumberBox>
