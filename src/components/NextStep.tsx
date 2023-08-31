@@ -3,7 +3,7 @@ import styled from "styled-components";
 function NextStep() {
   return (
     <Next>
-      <NextBtn>Next Step</NextBtn>
+      <NextBtn type="submit">Next Step</NextBtn>
     </Next>
   );
 }

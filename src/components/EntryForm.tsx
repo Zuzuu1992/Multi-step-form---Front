@@ -1,24 +1,63 @@
 import styled from "styled-components";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import loginSchema from "../loginSchema";
+import NextStep from "./NextStep";
 
 function EntryForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
+
+  const onSubmit = async (data) => {
+    console.log(data);
+  };
+
+  const handleInputBlur = () => {
+    handleSubmit(onSubmit)();
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <FillBox>
         <Label htmlFor="name">Name</Label>
-        <Input type="text" id="name" placeholder="e.g. Stephen King" />
+        <Input
+          type="text"
+          id="name"
+          placeholder="e.g. Stephen King"
+          {...register("name")}
+          onBlur={handleInputBlur}
+        />
       </FillBox>
+      {errors.name ? <p>{errors.name.message}</p> : null}
       <FillBox>
         <Label htmlFor="email">Email Address</Label>
         <Input
           type="text"
           id="email"
           placeholder="e.g. stephenking@lorem.com"
+          {...register("email")}
+          onBlur={handleInputBlur}
         />
       </FillBox>
+      {errors.email ? <p>{errors.email.message}</p> : null}
       <FillBox>
         <Label htmlFor="phone">Phone Number</Label>
-        <Input type="text" id="phone" placeholder="e.g. +1 234 567 890" />
+        <Input
+          type="text"
+          id="phone"
+          placeholder="e.g. +1 234 567 890"
+          {...register("phone")}
+          onBlur={handleInputBlur}
+        />
       </FillBox>
+      {errors.phone ? <p>{errors.phone.message}</p> : null}
+      {/* <NextStep /> */}
+      {/* <input type="submit" hidden /> */}
     </Form>
   );
 }
