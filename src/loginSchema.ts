@@ -1,17 +1,17 @@
 import * as yup from "yup";
 
 const loginSchema = yup.object({
-  name: yup
-    .string()
-    .min(4, "name must be four or more characters")
-    .required("name is required"),
+  name: yup.string().required("This field is required"),
 
   email: yup
     .string()
-    .email("must be a valid email")
-    .required("emmail is required"),
+    .email("Invalid email format")
+    .required("This field is required"),
 
-  phone: yup.number().required("phone is required"),
+  phone: yup
+    .string()
+    .matches(/^\+\d{1,3} ?\d{3} ?\d{3} ?\d{3}$/, "Invalid phone format")
+    .required("This field is required"),
 });
 
 export default loginSchema;

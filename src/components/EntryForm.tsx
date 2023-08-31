@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import loginSchema from "../loginSchema";
-import NextStep from "./NextStep";
 
 function EntryForm() {
   const {
@@ -24,7 +23,12 @@ function EntryForm() {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FillBox>
-        <Label htmlFor="name">Name</Label>
+        <ErrorLabelBox>
+          <Label htmlFor="name">Name</Label>
+          {errors.name ? (
+            <ErrorMessage>{errors.name.message}</ErrorMessage>
+          ) : null}
+        </ErrorLabelBox>
         <Input
           type="text"
           id="name"
@@ -33,9 +37,14 @@ function EntryForm() {
           onBlur={handleInputBlur}
         />
       </FillBox>
-      {errors.name ? <p>{errors.name.message}</p> : null}
+
       <FillBox>
-        <Label htmlFor="email">Email Address</Label>
+        <ErrorLabelBox>
+          <Label htmlFor="email">Email Address</Label>
+          {errors.email ? (
+            <ErrorMessage>{errors.email.message}</ErrorMessage>
+          ) : null}
+        </ErrorLabelBox>
         <Input
           type="text"
           id="email"
@@ -44,9 +53,14 @@ function EntryForm() {
           onBlur={handleInputBlur}
         />
       </FillBox>
-      {errors.email ? <p>{errors.email.message}</p> : null}
+
       <FillBox>
-        <Label htmlFor="phone">Phone Number</Label>
+        <ErrorLabelBox>
+          <Label htmlFor="phone">Phone Number</Label>
+          {errors.phone ? (
+            <ErrorMessage>{errors.phone.message}</ErrorMessage>
+          ) : null}
+        </ErrorLabelBox>
         <Input
           type="text"
           id="phone"
@@ -55,9 +69,6 @@ function EntryForm() {
           onBlur={handleInputBlur}
         />
       </FillBox>
-      {errors.phone ? <p>{errors.phone.message}</p> : null}
-      {/* <NextStep /> */}
-      {/* <input type="submit" hidden /> */}
     </Form>
   );
 }
@@ -97,6 +108,22 @@ const Input = styled.input`
 const Label = styled.label`
   color: var(--marineBlue);
   font-family: "Ubuntu", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const ErrorLabelBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ErrorMessage = styled.p`
+  color: var(--strawberryRed);
+  text-align: right;
+  font-family: Ubuntu;
   font-size: 12px;
   font-style: normal;
   font-weight: 500;
