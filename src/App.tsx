@@ -1,9 +1,10 @@
 import styled from "styled-components";
 import Background from "../src/assets/bg-sidebar-mobile.svg";
 import Pagination from "./components/Pagination";
-import Step from "./components/Step";
-import EntryForm from "./components/EntryForm";
+// import Step from "./components/Step";
+// import EntryForm from "./components/EntryForm";
 import NextStep from "./components/NextStep";
+import Plan from "./components/plan";
 
 function App() {
   return (
@@ -14,8 +15,9 @@ function App() {
           <Process>
             <Pagination />
             <Card>
-              <Step />
-              <EntryForm />
+              {/* <Step />
+              <EntryForm /> */}
+              <Plan />
             </Card>
           </Process>
           <NextStep />
@@ -43,6 +45,7 @@ const Process = styled.div`
   row-gap: 34px;
   /* padding: 34px 16px; */
   padding: 34px 16px 82px 16px;
+  width: 100%;
 `;
 
 const Option = styled.div`
@@ -57,4 +60,5 @@ const Card = styled.div`
   border-radius: 10px;
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
   padding: 32px 24px;
+  width: 100%;
 `;
