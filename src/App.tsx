@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Background from "../src/assets/bg-sidebar-mobile.svg";
 import Pagination from "./components/Pagination";
-// import Step from "./components/Step";
+import Step from "./components/Step";
 // import EntryForm from "./components/EntryForm";
 import NextStep from "./components/NextStep";
 import Plan from "./components/plan";
@@ -15,8 +15,8 @@ function App() {
           <Process>
             <Pagination />
             <Card>
-              {/* <Step />
-              <EntryForm /> */}
+              <Step />
+              {/* <EntryForm /> */}
               <Plan />
             </Card>
           </Process>

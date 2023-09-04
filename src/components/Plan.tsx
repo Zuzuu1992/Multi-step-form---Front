@@ -2,7 +2,7 @@ import styled from "styled-components";
 import ArcadeIcon from "../assets/icon-arcade.svg";
 import AdvancedIcon from "../assets/icon-advanced.svg";
 import ProIcon from "../assets/icon-pro.svg";
-import NextStep from "./NextStep";
+import PlanToggle from "./PlanToggle";
 
 function Plan() {
   return (
@@ -30,6 +30,7 @@ function Plan() {
           </Text>
         </Option>
       </PlanBox>
+      <PlanToggle />
     </PlanWrapper>
   );
 }
@@ -67,5 +68,20 @@ const Text = styled.div`
   row-gap: 7px;
 `;
 
-const Title = styled.p``;
-const Price = styled.p``;
+const Title = styled.p`
+  color: var(--marineBlue);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const Price = styled.p`
+  color: var(--coolGrey);
+  font-family: Ubuntu;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+`;

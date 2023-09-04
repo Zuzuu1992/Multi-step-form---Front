@@ -17,6 +17,7 @@ const Chapter = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 9px;
+  margin-bottom: 22px;
 `;
 
 const Title = styled.div`

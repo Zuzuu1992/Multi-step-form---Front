@@ -76,7 +76,7 @@ function EntryForm() {
 export default EntryForm;
 
 const Form = styled.form`
-  margin-top: 22px;
+  /* margin-top: 22px; */
   display: flex;
   flex-direction: column;
   row-gap: 16px;
