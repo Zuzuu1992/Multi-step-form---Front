@@ -1,10 +1,11 @@
 import styled from "styled-components";
 import Background from "../src/assets/bg-sidebar-mobile.svg";
 import Pagination from "./components/Pagination";
-import Step from "./components/Step";
+// import Step from "./components/Step";
 // import EntryForm from "./components/EntryForm";
 import NextStep from "./components/NextStep";
-import Finishing from "./components/Finishing";
+import Thank from "./components/Thank";
+// import Finishing from "./components/Finishing";
 // import AddOns from "./components/AddOns";
 // import Plan from "./components/plan";
 
@@ -17,11 +18,12 @@ function App() {
           <Process>
             <Pagination />
             <Card>
-              <Step />
+              {/* <Step /> */}
               {/* <EntryForm /> */}
               {/* <Plan /> */}
               {/* <AddOns /> */}
-              <Finishing />
+              {/* <Finishing /> */}
+              <Thank />
             </Card>
           </Process>
           <NextStep />
