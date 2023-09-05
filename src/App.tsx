@@ -4,7 +4,8 @@ import Pagination from "./components/Pagination";
 import Step from "./components/Step";
 // import EntryForm from "./components/EntryForm";
 import NextStep from "./components/NextStep";
-import AddOns from "./components/Addons";
+import Finishing from "./components/Finishing";
+// import AddOns from "./components/AddOns";
 // import Plan from "./components/plan";
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
               <Step />
               {/* <EntryForm /> */}
               {/* <Plan /> */}
-              <AddOns />
+              {/* <AddOns /> */}
+              <Finishing />
             </Card>
           </Process>
           <NextStep />
