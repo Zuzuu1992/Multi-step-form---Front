@@ -1,18 +1,21 @@
-import { useNumber } from "../store/useNumber";
+// import { useNumber } from "../store/useNumber";
 import styled from "styled-components";
 // import { persist, devtools } from "zustand/middleware";
 // import nextStep from "./NextStep";
+import { useCounterStore } from "../store/useNumber";
 
 function Pagination() {
-  const { step, nextStep } = useNumber();
+  // const { step, nextStep } = useNumber();
+  const { count, increment, decrement } = useCounterStore();
   // const step = useNumber((state) => state.step);
 
   return (
     <NumberBox>
-      <Number onClick={() => nextStep(1)}>{step}</Number>
-      <Number>2 </Number>
-      <Number>3</Number>
-      <Number>4</Number>
+      {Array.from({ length: 4 }).map((_, index) => (
+        <Number key={index} className={count === index ? "active" : ""}>
+          {index + 1}
+        </Number>
+      ))}
     </NumberBox>
   );
 }

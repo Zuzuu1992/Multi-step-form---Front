@@ -1,10 +1,22 @@
+import { useCounterStore } from "../store/useNumber";
 import styled from "styled-components";
 
-function NextStep() {
+interface NextStepProps {
+  onNextClick: () => void; // Define onNextClick prop as a function
+}
+
+function NextStep({ onNextClick }: NextStepProps) {
+  const { count } = useCounterStore();
+
+  const handleNextClick = () => {
+    onNextClick(); // Call the callback function to update the step
+  };
+
   return (
     <Next>
-      {/* <Back>Go Back</Back> */}
-      <NextBtn type="submit">Next Step</NextBtn>
+      <NextBtn type="button" onClick={handleNextClick}>
+        Next Step
+      </NextBtn>
     </Next>
   );
 }
