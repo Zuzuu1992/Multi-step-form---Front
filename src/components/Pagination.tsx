@@ -1,21 +1,32 @@
-// import { useNumber } from "../store/useNumber";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
+// import { useNumber } from "../store/useNumber";
 // import { persist, devtools } from "zustand/middleware";
 // import nextStep from "./NextStep";
-import { useCounterStore } from "../store/useNumber";
+// import { useCounterStore } from "../store/useNumber";
 
 function Pagination() {
-  // const { step, nextStep } = useNumber();
-  const { count, increment, decrement } = useCounterStore();
-  // const step = useNumber((state) => state.step);
+  const navigate = useNavigate();
+
+  const handle1Click = () => {
+    navigate("/");
+  };
+  const handle2Click = () => {
+    navigate("/plan");
+  };
+  const handle3Click = () => {
+    navigate("/pick");
+  };
+  const handle4Click = () => {
+    navigate("/finish");
+  };
 
   return (
     <NumberBox>
-      {Array.from({ length: 4 }).map((_, index) => (
-        <Number key={index} className={count === index ? "active" : ""}>
-          {index + 1}
-        </Number>
-      ))}
+      <Number onClick={handle1Click}> 1</Number>
+      <Number onClick={handle2Click}> 2</Number>
+      <Number onClick={handle3Click}> 3</Number>
+      <Number onClick={handle4Click}> 4</Number>
     </NumberBox>
   );
 }

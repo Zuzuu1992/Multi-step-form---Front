@@ -1,35 +1,23 @@
 import styled from "styled-components";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Background from "../src/assets/bg-sidebar-mobile.svg";
-import Pagination from "./components/Pagination";
-// import Step from "./components/Step";
-// import EntryForm from "./components/EntryForm";
-import NextStep from "./components/NextStep";
-import Thank from "./components/Thank";
-// import Finishing from "./components/Finishing";
-// import AddOns from "./components/AddOns";
-// import Plan from "./components/plan";
+import PersonalInfo from "./pages/PersonalInfo";
+import SelectPlan from "./pages/SelectPlan";
+import PickAddOns from "./pages/PickAddOns";
+import FinishingUp from "./pages/FinishingUp";
 
 function App() {
   return (
-    <>
-      <Main>
-        {/* <img src={Mskd} /> */}
-        <Option>
-          <Process>
-            <Pagination />
-            <Card>
-              {/* <Step /> */}
-              {/* <EntryForm /> */}
-              {/* <Plan /> */}
-              {/* <AddOns /> */}
-              {/* <Finishing /> */}
-              <Thank />
-            </Card>
-          </Process>
-          <NextStep />
-        </Option>
-      </Main>
-    </>
+    <Main>
+      <Router>
+        <Routes>
+          <Route path="/" element={<PersonalInfo />} />
+          <Route path="/plan" element={<SelectPlan />} />
+          <Route path="/pick" element={<PickAddOns />} />
+          <Route path="/finish" element={<FinishingUp />} />
+        </Routes>
+      </Router>
+    </Main>
   );
 }
 
@@ -42,29 +30,4 @@ const Main = styled.div`
   background-repeat: no-repeat;
   background-size: 100%;
   /* display: flex; */
-`;
-
-const Process = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 34px;
-  /* padding: 34px 16px; */
-  padding: 34px 16px 82px 16px;
-  width: 100%;
-`;
-
-const Option = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 34px;
-`;
-
-const Card = styled.div`
-  background-color: var(--white);
-  border-radius: 10px;
-  box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
-  padding: 32px 24px;
-  width: 100%;
 `;
