@@ -1,32 +1,48 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import useNumber from "../store/useNumber";
 // import { useNumber } from "../store/useNumber";
 // import { persist, devtools } from "zustand/middleware";
 // import nextStep from "./NextStep";
 // import { useCounterStore } from "../store/useNumber";
 
 function Pagination() {
-  const navigate = useNavigate();
+  const { currentPage, setCurrentPage } = useNumber();
 
-  const handle1Click = () => {
-    navigate("/");
+  const handlePageClick = (page: number) => {
+    setCurrentPage(page);
   };
-  const handle2Click = () => {
-    navigate("/plan");
-  };
-  const handle3Click = () => {
-    navigate("/pick");
-  };
-  const handle4Click = () => {
-    navigate("/finish");
-  };
+
+  // const navigate = useNavigate();
+
+  // const handle1Click = () => {
+  //   navigate("/");
+  // };
+  // const handle2Click = () => {
+  //   navigate("/plan");
+  // };
+  // const handle3Click = () => {
+  //   navigate("/pick");
+  // };
+  // const handle4Click = () => {
+  //   navigate("/finish");
+  // };
 
   return (
     <NumberBox>
-      <Number onClick={handle1Click}> 1</Number>
+      {/* <Number onClick={handle1Click}> 1</Number>
       <Number onClick={handle2Click}> 2</Number>
       <Number onClick={handle3Click}> 3</Number>
-      <Number onClick={handle4Click}> 4</Number>
+      <Number onClick={handle4Click}> 4</Number> */}
+      {[1, 2, 3, 4].map((page) => (
+        <Number
+          key={page}
+          className={currentPage === page ? "active" : ""}
+          onClick={() => handlePageClick(page)}
+        >
+          {page}
+        </Number>
+      ))}
     </NumberBox>
   );
 }

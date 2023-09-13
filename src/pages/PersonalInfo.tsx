@@ -71,7 +71,6 @@ const Title = styled.div`
 const Instruction = styled.div`
   color: var(--coolGrey);
   font-feature-settings: "clig" off, "liga" off;
-  /* Body (L) */
   font-family: "Ubuntu", sans-serif;
   font-size: 16px;
   font-style: normal;
