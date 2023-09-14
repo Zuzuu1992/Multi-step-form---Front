@@ -1,15 +1,13 @@
 import { create } from "zustand";
 
-interface numberState {
-  currentPage: number;
-  setCurrentPage: (page: number) => void;
-  // Add other relevant state here
+interface PaginationState {
+  active: boolean;
+  setActive: (pageNumber: boolean) => void;
 }
 
-const useNumber = create<numberState>((set) => ({
-  currentPage: 1, // Initialize with the first page
-  setCurrentPage: (page) => set({ currentPage: page }),
-  // Initialize other state values here
+const useNumber = create<PaginationState>((set) => ({
+  active: true,
+  setActive: (pageNumber) => set({ active: pageNumber }),
 }));
 
 export default useNumber;

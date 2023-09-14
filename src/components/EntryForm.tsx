@@ -2,8 +2,17 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import loginSchema from "../loginSchema";
+import useFormStore from "../store/useFormStore";
+
+interface FormDataProps {
+  name: string;
+  email: string;
+  phone: string;
+}
 
 function EntryForm() {
+  const { formData, setFormField } = useFormStore();
+
   const {
     register,
     handleSubmit,
@@ -12,7 +21,7 @@ function EntryForm() {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: FormDataProps) => {
     console.log(data);
   };
 
@@ -33,7 +42,9 @@ function EntryForm() {
           type="text"
           id="name"
           placeholder="e.g. Stephen King"
-          {...register("name")}
+          value={formData.name}
+          onChange={(e) => setFormField("name", e.target.value)}
+          // {...register("name")}
           onBlur={handleInputBlur}
         />
       </FillBox>
@@ -49,7 +60,9 @@ function EntryForm() {
           type="text"
           id="email"
           placeholder="e.g. stephenking@lorem.com"
-          {...register("email")}
+          value={formData.email}
+          onChange={(e) => setFormField("email", e.target.value)}
+          // {...register("email")}
           onBlur={handleInputBlur}
         />
       </FillBox>
@@ -65,7 +78,9 @@ function EntryForm() {
           type="text"
           id="phone"
           placeholder="e.g. +1 234 567 890"
-          {...register("phone")}
+          value={formData.phone}
+          onChange={(e) => setFormField("phone", e.target.value)}
+          // {...register("phone")}
           onBlur={handleInputBlur}
         />
       </FillBox>
