@@ -1,28 +1,17 @@
 import { create } from "zustand";
 
-interface FormData {
+export interface InputInfo {
   name: string;
   email: string;
   phone: string;
-  // Add more fields as needed
 }
 
 interface FormStore {
-  formData: FormData;
-  setFormField: (field: string, value: string) => void;
+  inputInfo: InputInfo;
+  setInputInfo: (newInputInfo: InputInfo) => void;
 }
 
-const useFormStore = create<FormStore>((set) => ({
-  formData: {
-    name: "",
-    email: "",
-    phone: "",
-    // Initialize other form fields here
-  },
-  setFormField: (field, value) =>
-    set((state) => ({
-      formData: { ...state.formData, [field]: value },
-    })),
+export const useFormStore = create<FormStore>((set) => ({
+  inputInfo: { name: "", email: "", phone: "" },
+  setInputInfo: (newInputInfo: InputInfo) => set({ inputInfo: newInputInfo }),
 }));
-
-export default useFormStore;

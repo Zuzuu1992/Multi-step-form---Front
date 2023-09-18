@@ -29,5 +29,6 @@ const Main = styled.div`
   height: 100%;
   background-repeat: no-repeat;
   background-size: 100%;
+  position: relative;
   /* display: flex; */
 `;

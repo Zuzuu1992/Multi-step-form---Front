@@ -2,17 +2,16 @@ import styled from "styled-components";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import loginSchema from "../loginSchema";
-import useFormStore from "../store/useFormStore";
+import { useEffect, useRef } from "react";
+import { useFormState } from "../store/useFormState";
 
-interface FormDataProps {
+interface FormData {
   name: string;
   email: string;
   phone: string;
 }
 
 function EntryForm() {
-  const { formData, setFormField } = useFormStore();
-
   const {
     register,
     handleSubmit,
@@ -21,16 +20,26 @@ function EntryForm() {
     resolver: yupResolver(loginSchema),
   });
 
-  const onSubmit = async (data: FormDataProps) => {
+  // const onSubmit = async (data: any) => {
+  //   console.log(data);
+  // };
+  const submitHandler = async (data: FormData) => {
     console.log(data);
   };
 
-  const handleInputBlur = () => {
-    handleSubmit(onSubmit)();
-  };
+  const setFormRef = useFormState((state) => state.setFormRef);
+  const formRef = useRef<HTMLFormElement | null>(null);
+
+  useEffect(() => {
+    setFormRef(formRef);
+  }, [setFormRef]);
+
+  // const handleInputBlur = () => {
+  //   handleSubmit(onSubmit)();
+  // };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form ref={formRef} onSubmit={handleSubmit(submitHandler)}>
       <FillBox>
         <ErrorLabelBox>
           <Label htmlFor="name">Name</Label>
@@ -42,10 +51,8 @@ function EntryForm() {
           type="text"
           id="name"
           placeholder="e.g. Stephen King"
-          value={formData.name}
-          onChange={(e) => setFormField("name", e.target.value)}
-          // {...register("name")}
-          onBlur={handleInputBlur}
+          {...register("name")}
+          // onBlur={handleInputBlur}
         />
       </FillBox>
 
@@ -60,10 +67,8 @@ function EntryForm() {
           type="text"
           id="email"
           placeholder="e.g. stephenking@lorem.com"
-          value={formData.email}
-          onChange={(e) => setFormField("email", e.target.value)}
-          // {...register("email")}
-          onBlur={handleInputBlur}
+          {...register("email")}
+          // onBlur={handleInputBlur}
         />
       </FillBox>
 
@@ -78,10 +83,8 @@ function EntryForm() {
           type="text"
           id="phone"
           placeholder="e.g. +1 234 567 890"
-          value={formData.phone}
-          onChange={(e) => setFormField("phone", e.target.value)}
-          // {...register("phone")}
-          onBlur={handleInputBlur}
+          {...register("phone")}
+          // onBlur={handleInputBlur}
         />
       </FillBox>
     </Form>

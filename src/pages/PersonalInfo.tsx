@@ -1,43 +1,35 @@
 import Pagination from "../components/Pagination";
 import styled from "styled-components";
-import EntryForm from "../components/EntryForm";
-import Plan from "../components/Plan";
-import AddOns from "../components/AddOns";
-import Finishing from "../components/Finishing";
-import usePage from "../store/usePage";
+// import usePage from "../store/usePage";
+// import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import loginSchema from "../loginSchema";
+import { useFormStore } from "../store/useFormStore";
+
+interface FormData {
+  name: string;
+  email: string;
+  phone: string;
+}
 
 function PersonalInfo() {
-  const { page, setPage } = usePage();
+  const navigate = useNavigate();
+  const { inputInfo, setInputInfo } = useFormStore();
+  // const { page, setPage } = usePage();
 
-  const pageTiTles = [
-    "Personal info",
-    "Select your plan",
-    "Pick add-ons",
-    "Finishing up",
-  ];
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(loginSchema),
+  });
 
-  const displayInstructions = () => {
-    if (page === 0) {
-      return "Please provide your name, email address, and phone number.";
-    } else if (page === 1) {
-      return "You have the option of monthly or yearly billing.";
-    } else if (page === 2) {
-      return "Add-ons help enhance your gaming experience.";
-    } else {
-      return "Double-check everything looks OK before confirming.";
-    }
-  };
-
-  const displayPage = () => {
-    if (page === 0) {
-      return <EntryForm />;
-    } else if (page === 1) {
-      return <Plan />;
-    } else if (page === 2) {
-      return <AddOns />;
-    } else {
-      return <Finishing />;
-    }
+  const submitHandler = async (data: FormData) => {
+    navigate("/plan");
+    setInputInfo(data);
   };
 
   return (
@@ -47,22 +39,77 @@ function PersonalInfo() {
           <Pagination />
           <Card>
             <Chapter>
-              <Title>{pageTiTles[page]}</Title>
-              <Instruction>{displayInstructions()}</Instruction>
+              <Title>Personal info</Title>
+              <Instruction>
+                Please provide your name, email address, and phone number.
+              </Instruction>
             </Chapter>
-            <Body>{displayPage()}</Body>
+            <Form onSubmit={handleSubmit(submitHandler)}>
+              <FillBox>
+                <ErrorLabelBox>
+                  <Label htmlFor="name">Name</Label>
+                  {errors.name ? (
+                    <ErrorMessage>{errors.name.message}</ErrorMessage>
+                  ) : null}
+                </ErrorLabelBox>
+                <Input
+                  type="text"
+                  id="name"
+                  placeholder="e.g. Stephen King"
+                  {...register("name", {
+                    onChange: (e) => {
+                      setInputInfo({ ...inputInfo, name: e.target.value });
+                    },
+                  })}
+                  // onBlur={handleInputBlur}
+                />
+              </FillBox>
+
+              <FillBox>
+                <ErrorLabelBox>
+                  <Label htmlFor="email">Email Address</Label>
+                  {errors.email ? (
+                    <ErrorMessage>{errors.email.message}</ErrorMessage>
+                  ) : null}
+                </ErrorLabelBox>
+                <Input
+                  type="text"
+                  id="email"
+                  placeholder="e.g. stephenking@lorem.com"
+                  {...register("email", {
+                    onChange: (e) => {
+                      setInputInfo({ ...inputInfo, email: e.target.value });
+                    },
+                  })}
+                  // onBlur={handleInputBlur}
+                />
+              </FillBox>
+
+              <FillBox>
+                <ErrorLabelBox>
+                  <Label htmlFor="phone">Phone Number</Label>
+                  {errors.phone ? (
+                    <ErrorMessage>{errors.phone.message}</ErrorMessage>
+                  ) : null}
+                </ErrorLabelBox>
+                <Input
+                  type="text"
+                  id="phone"
+                  placeholder="e.g. +1 234 567 890"
+                  {...register("phone", {
+                    onChange: (e) => {
+                      setInputInfo({ ...inputInfo, phone: e.target.value });
+                    },
+                  })}
+                  // onBlur={handleInputBlur}
+                />
+              </FillBox>
+              <Next>
+                <NextBtn type="submit">Next Step</NextBtn>
+              </Next>
+            </Form>
           </Card>
         </Process>
-        <Next>
-          <NextBtn
-            disabled={page == pageTiTles.length - 1}
-            onClick={() => {
-              setPage(page + 1);
-            }}
-          >
-            Next Step
-          </NextBtn>
-        </Next>
       </Option>
     </>
   );
@@ -121,7 +168,7 @@ const Instruction = styled.div`
   line-height: 25px; /* 156.25% */
 `;
 
-const Body = styled.div``;
+// const Body = styled.div``;
 
 const Next = styled.div`
   background-color: var(--white);
@@ -131,6 +178,9 @@ const Next = styled.div`
   align-items: center; */
   width: 100%;
   padding: 16px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 `;
 
 // const Back = styled.div`
@@ -154,4 +204,59 @@ const NextBtn = styled.button`
   font-weight: 500;
   line-height: normal;
   border: none;
+`;
+
+const Form = styled.form`
+  /* margin-top: 22px; */
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+`;
+
+const FillBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 3px;
+`;
+
+const Input = styled.input`
+  height: 40px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color, #d6d9e6);
+  background: var(--white);
+  font-family: "Ubuntu", sans-serif;
+  padding-left: 16px;
+  ::placeholder {
+    color: var(--coolGrey);
+    font-family: "Ubuntu", sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+`;
+
+const Label = styled.label`
+  color: var(--marineBlue);
+  font-family: "Ubuntu", sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const ErrorLabelBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ErrorMessage = styled.p`
+  color: var(--strawberryRed);
+  text-align: right;
+  font-family: Ubuntu;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 `;
