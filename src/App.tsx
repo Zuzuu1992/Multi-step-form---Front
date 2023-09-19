@@ -5,6 +5,7 @@ import PersonalInfo from "./pages/PersonalInfo";
 import SelectPlan from "./pages/SelectPlan";
 import PickAddOns from "./pages/PickAddOns";
 import FinishingUp from "./pages/FinishingUp";
+import ThankYou from "./pages/ThankYou";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/plan" element={<SelectPlan />} />
           <Route path="/pick" element={<PickAddOns />} />
           <Route path="/finish" element={<FinishingUp />} />
+          <Route path="/thank" element={<ThankYou />} />
         </Routes>
       </Router>
     </Main>

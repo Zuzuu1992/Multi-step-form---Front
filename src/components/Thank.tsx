@@ -24,8 +24,8 @@ const ThankBox = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 24px;
-  margin-top: 79px;
-  margin-bottom: 79px;
+  /* margin-top: 79px;
+  margin-bottom: 79px; */
 `;
 
 const ThankIcon = styled.img`

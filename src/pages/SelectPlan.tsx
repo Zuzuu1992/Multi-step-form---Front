@@ -1,14 +1,30 @@
 import Pagination from "../components/Pagination";
 import styled from "styled-components";
-import NextStep from "../components/NextStep";
 import Plan from "../components/Plan";
+import useActivePage from "../store/useActivePage";
+import { useNavigate } from "react-router-dom";
+// import { useState } from "react";
+
+// interface PaginationProps {
+//   activePage: number; // Pass activePage as a prop
+// }
 
 function SelectPlan() {
+  const activePage = useActivePage((state) => state.activePage);
+  const navigate = useNavigate();
+
+  const handleNextClick = () => {
+    navigate("/pick");
+  };
+  const handleBackClick = () => {
+    navigate("/");
+  };
+
   return (
     <>
       <Option>
         <Process>
-          <Pagination />
+          <Pagination activePage={activePage} />
           <Card>
             <Chapter>
               <Title>Select your plan</Title>
@@ -19,7 +35,12 @@ function SelectPlan() {
             <Plan />
           </Card>
         </Process>
-        <NextStep />
+        <Next>
+          <Back onClick={handleBackClick}>Go Back</Back>
+          <NextBtn onClick={handleNextClick} type="submit">
+            Next Step
+          </NextBtn>
+        </Next>
       </Option>
     </>
   );
@@ -42,6 +63,7 @@ const Option = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 34px;
+  position: relative;
 `;
 
 const Card = styled.div`
@@ -50,6 +72,7 @@ const Card = styled.div`
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
   padding: 32px 24px;
   width: 100%;
+  margin-bottom: 20px;
 `;
 
 const Chapter = styled.div`
@@ -77,4 +100,40 @@ const Instruction = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 156.25% */
+`;
+
+const Next = styled.div`
+  background-color: var(--white);
+  display: flex;
+  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
+const Back = styled.div`
+  color: var(--coolGrey);
+  font-family: Ubuntu;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const NextBtn = styled.button`
+  background-color: var(--white);
+  padding: 12px 16px;
+  border-radius: 4px;
+  background: var(--marineBlue);
+  color: var(--white, #fff);
+  font-family: "Ubuntu", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
 `;

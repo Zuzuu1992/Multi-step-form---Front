@@ -1,19 +1,19 @@
 import Pagination from "../components/Pagination";
 import styled from "styled-components";
-import NextStep from "../components/NextStep";
 import Thank from "../components/Thank";
+import useActivePage from "../store/useActivePage";
 
 function FinishingUp() {
+  const activePage = useActivePage((state) => state.activePage);
   return (
     <>
       <Option>
         <Process>
-          <Pagination />
+          <Pagination activePage={activePage} />
           <Card>
             <Thank />
           </Card>
         </Process>
-        <NextStep />
       </Option>
     </>
   );

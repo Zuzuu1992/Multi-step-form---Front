@@ -1,14 +1,28 @@
 import Pagination from "../components/Pagination";
 import styled from "styled-components";
-import NextStep from "../components/NextStep";
 import AddOns from "../components/AddOns";
+import useActivePage from "../store/useActivePage";
+import { useNavigate } from "react-router-dom";
+
+// interface PaginationProps {
+//   activePage: number; // Pass activePage as a prop
+// }
 
 function PickAddOns() {
+  const activePage = useActivePage((state) => state.activePage);
+  const navigate = useNavigate();
+
+  const handleNextClick = () => {
+    navigate("/finish");
+  };
+  const handleBackClick = () => {
+    navigate("/plan");
+  };
   return (
     <>
       <Option>
         <Process>
-          <Pagination />
+          <Pagination activePage={activePage} />
           <Card>
             <Chapter>
               <Title>Pick add-ons</Title>
@@ -19,7 +33,12 @@ function PickAddOns() {
             <AddOns />
           </Card>
         </Process>
-        <NextStep />
+        <Next>
+          <Back onClick={handleBackClick}>Go Back</Back>
+          <NextBtn onClick={handleNextClick} type="submit">
+            Next Step
+          </NextBtn>
+        </Next>
       </Option>
     </>
   );
@@ -77,4 +96,40 @@ const Instruction = styled.div`
   font-style: normal;
   font-weight: 400;
   line-height: 25px; /* 156.25% */
+`;
+
+const Next = styled.div`
+  background-color: var(--white);
+  display: flex;
+  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 16px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+`;
+
+const Back = styled.div`
+  color: var(--coolGrey);
+  font-family: Ubuntu;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const NextBtn = styled.button`
+  background-color: var(--white);
+  padding: 12px 16px;
+  border-radius: 4px;
+  background: var(--marineBlue);
+  color: var(--white, #fff);
+  font-family: "Ubuntu", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  border: none;
 `;

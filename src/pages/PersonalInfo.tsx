@@ -1,5 +1,6 @@
 import Pagination from "../components/Pagination";
 import styled from "styled-components";
+import { useState } from "react";
 // import usePage from "../store/usePage";
 // import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
@@ -7,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import loginSchema from "../loginSchema";
 import { useFormStore } from "../store/useFormStore";
+import useActivePage from "../store/useActivePage";
 
 interface FormData {
   name: string;
@@ -14,10 +16,16 @@ interface FormData {
   phone: string;
 }
 
+// interface PaginationProps {
+//   activePage: number; // Pass activePage as a prop
+// }
+
 function PersonalInfo() {
   const navigate = useNavigate();
   const { inputInfo, setInputInfo } = useFormStore();
-  // const { page, setPage } = usePage();
+  const activePage = useActivePage((state) => state.activePage);
+  // const setActivePage = useActivePage((state) => state.setActivePage);
+  // const [currentStep, setCurrentStep] = useState(1);
 
   const {
     register,
@@ -30,13 +38,14 @@ function PersonalInfo() {
   const submitHandler = async (data: FormData) => {
     navigate("/plan");
     setInputInfo(data);
+    console.log(data);
   };
 
   return (
     <>
       <Option>
         <Process>
-          <Pagination />
+          <Pagination activePage={activePage} />
           <Card>
             <Chapter>
               <Title>Personal info</Title>
