@@ -1,14 +1,25 @@
 import styled from "styled-components";
+import { usePlanStore } from "../store/usePlanStore";
+
+interface RectangleProps {
+  $active: boolean;
+}
 
 function PlanToggle() {
+  const { period, togglePeriod } = usePlanStore();
+
+  const handlePeriod = () => {
+    togglePeriod();
+  };
+
   return (
     <PlanDurationBox>
       <TimeSwitchBox>
-        <Month>Monthly</Month>
-        <Rectangle>
-          <Circle></Circle>
+        <Month $active={period}>Monthly</Month>
+        <Rectangle onClick={handlePeriod} $active={period}>
+          <Circle $active={period}></Circle>
         </Rectangle>
-        <Year>Yearly</Year>
+        <Year $active={!period}>Yearly</Year>
       </TimeSwitchBox>
     </PlanDurationBox>
   );
@@ -30,17 +41,7 @@ const TimeSwitchBox = styled.div`
   column-gap: 24px;
 `;
 
-const Month = styled.p`
-  color: var(--marineBlue);
-  text-align: right;
-  font-family: Ubuntu;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-`;
-
-const Rectangle = styled.div`
+const Rectangle = styled.div<RectangleProps>`
   display: flex;
   align-items: flex-start;
   width: 38px;
@@ -50,18 +51,32 @@ const Rectangle = styled.div`
   position: relative;
   padding: 4px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 `;
 
-const Circle = styled.div`
+const Circle = styled.div<RectangleProps>`
   width: 12px;
   height: 12px;
   border-radius: 50%;
   background-color: var(--white);
+  transform: ${({ $active }) => ($active ? "translateX(145%)" : "none")};
   position: absolute;
 `;
 
-const Year = styled.p`
-  color: var(--grey, #9699aa);
+const Month = styled.p<RectangleProps>`
+  color: ${({ $active }) =>
+    $active ? "var(--grey, #9699aa)" : "var(--marineBlue)"};
+  text-align: right;
+  font-family: Ubuntu;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+`;
+
+const Year = styled.p<RectangleProps>`
+  color: ${({ $active }) =>
+    $active ? "var(--grey, #9699aa)" : "var(--marineBlue)"};
   font-family: Ubuntu;
   font-size: 14px;
   font-style: normal;

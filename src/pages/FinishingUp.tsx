@@ -6,22 +6,14 @@ import { useNavigate } from "react-router-dom";
 import Thank from "../components/Thank";
 import { useState } from "react";
 
-// interface PaginationProps {
-//   activePage: number; // Pass activePage as a prop
-// }
-
 function FinishingUp() {
   const activePage = useActivePage((state) => state.activePage);
-  const [showThank, setShowThank] = useState(false); // State to control rendering
+  const [showThank, setShowThank] = useState(false);
   const navigate = useNavigate();
 
   const handleNextClick = () => {
-    setShowThank(true); // Set showThank to true to render the Thank component
+    setShowThank(true);
   };
-
-  // const handleNextClick = () => {
-  //   navigate("/thank");
-  // };
 
   const handleBackClick = () => {
     navigate("/pick");

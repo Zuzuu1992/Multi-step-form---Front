@@ -3,19 +3,21 @@ import styled from "styled-components";
 import Plan from "../components/Plan";
 import useActivePage from "../store/useActivePage";
 import { useNavigate } from "react-router-dom";
-// import { useState } from "react";
-
-// interface PaginationProps {
-//   activePage: number; // Pass activePage as a prop
-// }
+import { useSelectedPlanStore } from "../store/useSelectedPlanStore";
 
 function SelectPlan() {
   const activePage = useActivePage((state) => state.activePage);
+  const { selectedOption } = useSelectedPlanStore();
   const navigate = useNavigate();
 
   const handleNextClick = () => {
-    navigate("/pick");
+    if (selectedOption) {
+      navigate("/pick");
+    } else {
+      alert("Please select a plan before proceeding.");
+    }
   };
+
   const handleBackClick = () => {
     navigate("/");
   };

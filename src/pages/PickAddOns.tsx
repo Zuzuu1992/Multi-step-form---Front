@@ -4,12 +4,9 @@ import AddOns from "../components/AddOns";
 import useActivePage from "../store/useActivePage";
 import { useNavigate } from "react-router-dom";
 
-// interface PaginationProps {
-//   activePage: number; // Pass activePage as a prop
-// }
-
 function PickAddOns() {
   const activePage = useActivePage((state) => state.activePage);
+
   const navigate = useNavigate();
 
   const handleNextClick = () => {

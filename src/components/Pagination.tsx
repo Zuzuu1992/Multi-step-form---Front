@@ -6,8 +6,6 @@ interface PaginationProps {
 }
 
 function Pagination({ activePage }: PaginationProps) {
-  // const { page, setPage } = usePage();
-  // const setActivePage = useActivePage((state) => state.setActivePage);
   const navigate = useNavigate();
   const location = useLocation();
 

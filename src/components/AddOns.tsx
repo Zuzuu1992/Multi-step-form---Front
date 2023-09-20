@@ -1,39 +1,72 @@
 import styled from "styled-components";
 import Checkmark from "../assets/icon-checkmark.svg";
+import { usePlanStore } from "../store/usePlanStore";
+import { useAddOnsStore } from "../store/useAddOnsStore";
+
+interface OptionProps {
+  selected: boolean;
+}
 
 function AddOns() {
+  const { period } = usePlanStore();
+  const { selectedAddOns, setSelectedAddOns } = useAddOnsStore();
+
+  const toggleAddOn = (addOnName: string) => {
+    if (selectedAddOns.includes(addOnName)) {
+      setSelectedAddOns(selectedAddOns.filter((name) => name !== addOnName));
+    } else {
+      setSelectedAddOns([...selectedAddOns, addOnName]);
+    }
+  };
+
+  const isAddOnSelected = (addOnName: string) => {
+    return selectedAddOns.includes(addOnName);
+  };
+
   return (
     <AddOnWrapper>
       <AddOnBox>
-        <Option>
+        <Option selected={isAddOnSelected("Online service")}>
           <Left>
-            <Check type="checkbox" />
+            <Check
+              type="checkbox"
+              checked={isAddOnSelected("Online service")}
+              onChange={() => toggleAddOn("Online service")}
+            />
             <Text>
               <Title>Online service</Title>
               <Details>Access to multiplayer games</Details>
             </Text>
           </Left>
-          <Price>+$1/mo</Price>
+          {period ? <Price>+$10/yr</Price> : <Price>+$1/mo</Price>}
         </Option>
-        <Option>
+        <Option selected={isAddOnSelected("Larger storage")}>
           <Left>
-            <Check type="checkbox" />
+            <Check
+              type="checkbox"
+              checked={isAddOnSelected("Larger storage")}
+              onChange={() => toggleAddOn("Larger storage")}
+            />
             <Text>
               <Title>Larger storage</Title>
               <Details>Extra 1TB of cloud save</Details>
             </Text>
           </Left>
-          <Price>+$2/mo</Price>
+          {period ? <Price>+$20/yr</Price> : <Price>+$2/mo</Price>}
         </Option>
-        <Option>
+        <Option selected={isAddOnSelected("Customizable profile")}>
           <Left>
-            <Check type="checkbox" />
+            <Check
+              type="checkbox"
+              checked={isAddOnSelected("Customizable profile")}
+              onChange={() => toggleAddOn("Customizable profile")}
+            />
             <Text>
               <Title>Customizable profile</Title>
               <Details>Custom theme on your profile</Details>
             </Text>
           </Left>
-          <Price>+$2/mo</Price>
+          {period ? <Price>+$20/yr</Price> : <Price>+$2/mo</Price>}
         </Option>
       </AddOnBox>
     </AddOnWrapper>
@@ -54,14 +87,16 @@ const AddOnBox = styled.div`
   row-gap: 12px;
 `;
 
-const Option = styled.div`
+const Option = styled.div<OptionProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   column-gap: 14px;
   padding: 14px 16px;
   border-radius: 8px;
-  border: 1px solid var(--lightGrey);
+  border: 1px solid
+    ${({ selected }) =>
+      selected ? "var(--Purple, #483EFF)" : "var(--lightGrey)"};
   background: var(--white, #fff);
 `;
 
