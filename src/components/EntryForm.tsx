@@ -111,8 +111,14 @@ const Input = styled.input`
   border-radius: 4px;
   border: 1px solid var(--border-color, #d6d9e6);
   background: var(--white);
-  font-family: "Ubuntu", sans-serif;
   padding-left: 16px;
+  color: var(--Denim, #022959);
+  font-family: Ubuntu;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+
   ::placeholder {
     color: var(--coolGrey);
     font-family: "Ubuntu", sans-serif;

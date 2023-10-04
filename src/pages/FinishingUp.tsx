@@ -5,6 +5,7 @@ import useActivePage from "../store/useActivePage";
 import { useNavigate } from "react-router-dom";
 import Thank from "../components/Thank";
 import { useState } from "react";
+import Background from "../assets/bg-sidebar-mobile.svg";
 
 function FinishingUp() {
   const activePage = useActivePage((state) => state.activePage);
@@ -63,6 +64,17 @@ function FinishingUp() {
 
 export default FinishingUp;
 
+const Option = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 34px;
+  background-image: url(${Background});
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 30%;
+`;
+
 const Process = styled.div`
   display: flex;
   flex-direction: column;
@@ -71,13 +83,6 @@ const Process = styled.div`
   /* padding: 34px 16px; */
   padding: 34px 16px 82px 16px;
   width: 100%;
-`;
-
-const Option = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 34px;
 `;
 
 const Card = styled.div`

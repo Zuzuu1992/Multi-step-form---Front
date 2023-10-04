@@ -6,6 +6,9 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import loginSchema from "../loginSchema";
 import { useFormStore } from "../store/useFormStore";
 import useActivePage from "../store/useActivePage";
+import Background from "../assets/bg-sidebar-mobile.svg";
+import BackgroundDesktop from "../assets/bg-sidebar-desktop.svg";
+import { useEffect, useState } from "react";
 
 interface FormData {
   name: string;
@@ -15,6 +18,20 @@ interface FormData {
 
 function PersonalInfo() {
   const navigate = useNavigate();
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1440);
+
+  const handleResize = () => {
+    setIsDesktop(window.innerWidth >= 1440);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const { inputInfo, setInputInfo } = useFormStore();
   const activePage = useActivePage((state) => state.activePage);
 
@@ -104,9 +121,12 @@ function PersonalInfo() {
                   // onBlur={handleInputBlur}
                 />
               </FillBox>
-              <Next>
-                <NextBtn type="submit">Next Step</NextBtn>
-              </Next>
+              {!isDesktop && (
+                <Next>
+                  <NextBtn type="submit">Next Step</NextBtn>
+                </Next>
+              )}
+              {isDesktop && <NextBtn type="submit">Next Step</NextBtn>}
             </Form>
           </Card>
         </Process>
@@ -117,6 +137,37 @@ function PersonalInfo() {
 
 export default PersonalInfo;
 
+const Option = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 34px;
+  background-image: url(${Background});
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 30%;
+
+  @media (min-width: 1440px) {
+    /* background-image: url(${BackgroundDesktop});
+    background-size: 30%;
+    height: 100%;
+    align-items: flex-end;
+    background-color: white;
+    padding-right: 100px;
+    background-position: 16px 20px;
+    background-size: 34%; */
+    background-image: none;
+    /* background-color: yellow; */
+    background: var(--White, #fff);
+    /* height: 100%; */
+    /* height: auto; */
+    height: 600px;
+    padding: 16px;
+    border-radius: 15px;
+    align-items: stretch;
+  }
+`;
+
 const Process = styled.div`
   display: flex;
   flex-direction: column;
@@ -125,13 +176,16 @@ const Process = styled.div`
   /* padding: 34px 16px; */
   padding: 34px 16px 82px 16px;
   width: 100%;
-`;
-
-const Option = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 34px;
+  @media (min-width: 1440px) {
+    /* width: 60%; */
+    flex-direction: row;
+    column-gap: 0px;
+    align-items: flex-start;
+    padding: 0;
+    height: 100%;
+    justify-content: center;
+    width: auto;
+  }
 `;
 
 const Card = styled.div`
@@ -139,7 +193,14 @@ const Card = styled.div`
   border-radius: 10px;
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
   padding: 32px 24px;
-  width: 100%;
+  /* width: 100%; */
+  @media (min-width: 1440px) {
+    padding: 40px 100px 32px 100px;
+    box-shadow: none;
+    /* flex-grow: 1; */
+    height: 100%;
+    width: 72%;
+  }
 `;
 
 const Chapter = styled.div`
@@ -147,6 +208,10 @@ const Chapter = styled.div`
   flex-direction: column;
   row-gap: 9px;
   margin-bottom: 22px;
+  @media (min-width: 1440px) {
+    margin-bottom: 35px;
+    row-gap: 11px;
+  }
 `;
 
 const Title = styled.div`
@@ -156,6 +221,9 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  @media (min-width: 1440px) {
+    font-size: 32px;
+  }
 `;
 
 const Instruction = styled.div`
@@ -181,6 +249,10 @@ const Next = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
+  @media (min-width: 1440px) {
+    position: static;
+    padding: 92px 0px 0px 0px;
+  }
 `;
 
 // const Back = styled.div`
@@ -204,6 +276,18 @@ const NextBtn = styled.button`
   font-weight: 500;
   line-height: normal;
   border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    background: #164a8a;
+  }
+  @media (min-width: 1440px) {
+    font-size: 16px;
+    padding: 14px 24px;
+    width: 123px;
+    align-self: flex-end;
+    margin-top: 92px;
+  }
 `;
 
 const Form = styled.form`
@@ -211,12 +295,18 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   row-gap: 16px;
+  @media (min-width: 1440px) {
+    row-gap: 24px;
+  }
 `;
 
 const FillBox = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 3px;
+  @media (min-width: 1440px) {
+    row-gap: 8px;
+  }
 `;
 
 const Input = styled.input`
@@ -225,7 +315,15 @@ const Input = styled.input`
   border: 1px solid var(--border-color, #d6d9e6);
   background: var(--white);
   font-family: "Ubuntu", sans-serif;
+  color: var(--Denim, #022959);
   padding-left: 16px;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  @media (min-width: 1440px) {
+    font-size: 16px;
+  }
   ::placeholder {
     color: var(--coolGrey);
     font-family: "Ubuntu", sans-serif;
@@ -233,6 +331,9 @@ const Input = styled.input`
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+    @media (min-width: 1440px) {
+      font-size: 16px;
+    }
   }
 `;
 
@@ -243,6 +344,9 @@ const Label = styled.label`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  @media (min-width: 1440px) {
+    font-size: 14px;
+  }
 `;
 
 const ErrorLabelBox = styled.div`
@@ -259,4 +363,6 @@ const ErrorMessage = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  @media (min-width: 1440px) {
+  }
 `;

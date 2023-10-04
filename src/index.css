@@ -22,7 +22,8 @@
 html,
 body {
   width: 100%;
-  height: 100%;
+  /* height: 100%; */
+  height: 100vh;
   /* font-family: "Ubuntu", sans-serif !important; */
 }
 
@@ -31,5 +32,5 @@ body {
 }
 
 #root {
-  height: 100%;
+  /* height: 100%; */
 }

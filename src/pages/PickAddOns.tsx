@@ -3,6 +3,7 @@ import styled from "styled-components";
 import AddOns from "../components/AddOns";
 import useActivePage from "../store/useActivePage";
 import { useNavigate } from "react-router-dom";
+import Background from "../assets/bg-sidebar-mobile.svg";
 
 function PickAddOns() {
   const activePage = useActivePage((state) => state.activePage);
@@ -43,6 +44,17 @@ function PickAddOns() {
 
 export default PickAddOns;
 
+const Option = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 34px;
+  background-image: url(${Background});
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 30%;
+`;
+
 const Process = styled.div`
   display: flex;
   flex-direction: column;
@@ -53,12 +65,6 @@ const Process = styled.div`
   width: 100%;
 `;
 
-const Option = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  row-gap: 34px;
-`;
 
 const Card = styled.div`
   background-color: var(--white);
