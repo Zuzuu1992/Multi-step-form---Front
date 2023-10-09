@@ -119,6 +119,9 @@ const FinishWrapper = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 24px;
+  @media (min-width: 1440px) {
+    row-gap: 26px;
+  }
 `;
 
 const Summery = styled.div`
@@ -128,6 +131,9 @@ const Summery = styled.div`
   border-radius: 8px;
   background: var(--alabaster);
   padding: 16px;
+  @media (min-width: 1440px) {
+    row-gap: 16px;
+  }
 `;
 
 const FirstRow = styled.div`
@@ -140,6 +146,9 @@ const LeftSide = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 3px;
+  @media (min-width: 1440px) {
+    row-gap: 7px;
+  }
 `;
 
 const ChosenPlan = styled.p`
@@ -149,6 +158,9 @@ const ChosenPlan = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  @media (min-width: 1440px) {
+    font-size: 16px;
+  }
 `;
 
 const Change = styled.p`
@@ -159,6 +171,11 @@ const Change = styled.p`
   font-weight: 400;
   line-height: 20px;
   text-decoration-line: underline;
+  transition: all 0.3s;
+  cursor: pointer;
+  &:hover {
+    color: var(--Purple, #483eff);
+  }
 `;
 
 const PriceRight = styled.p`
@@ -169,6 +186,9 @@ const PriceRight = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
+  @media (min-width: 1440px) {
+    font-size: 16px;
+  }
 `;
 
 const Line = styled.div`
@@ -228,4 +248,7 @@ const TotoalPrice = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: 20px;
+  @media (min-width: 1440px) {
+    font-size: 20px;
+  }
 `;

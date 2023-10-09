@@ -85,6 +85,9 @@ const AddOnBox = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 12px;
+  @media (min-width: 1440px) {
+    row-gap: 16px;
+  }
 `;
 
 const Option = styled.div<OptionProps>`
@@ -98,18 +101,28 @@ const Option = styled.div<OptionProps>`
     ${({ selected }) =>
       selected ? "var(--Purple, #483EFF)" : "var(--lightGrey)"};
   background: var(--white, #fff);
+  cursor: pointer;
+  @media (min-width: 1440px) {
+    padding: 16px 24px 20px 16px;
+  }
 `;
 
 const Left = styled.div`
   display: flex;
   align-items: center;
   column-gap: 16px;
+  @media (min-width: 1440px) {
+    column-gap: 24px;
+  }
 `;
 
 const Text = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 3px;
+  @media (min-width: 1440px) {
+    row-gap: 7px;
+  }
 `;
 
 const Title = styled.p`
@@ -119,6 +132,9 @@ const Title = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  @media (min-width: 1440px) {
+    font-size: 16px;
+  }
 `;
 
 const Price = styled.p`
@@ -129,6 +145,9 @@ const Price = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
+  @media (min-width: 1440px) {
+    font-size: 15px;
+  }
 `;
 
 const Details = styled.p`
@@ -138,6 +157,9 @@ const Details = styled.p`
   font-style: normal;
   font-weight: 400;
   line-height: 20px;
+  @media (min-width: 1440px) {
+    font-size: 15px;
+  }
 `;
 
 const Check = styled.input`

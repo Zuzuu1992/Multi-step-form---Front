@@ -148,19 +148,8 @@ const Option = styled.div`
   height: 30%;
 
   @media (min-width: 1440px) {
-    /* background-image: url(${BackgroundDesktop});
-    background-size: 30%;
-    height: 100%;
-    align-items: flex-end;
-    background-color: white;
-    padding-right: 100px;
-    background-position: 16px 20px;
-    background-size: 34%; */
     background-image: none;
-    /* background-color: yellow; */
     background: var(--White, #fff);
-    /* height: 100%; */
-    /* height: auto; */
     height: 600px;
     padding: 16px;
     border-radius: 15px;
@@ -173,11 +162,9 @@ const Process = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 34px;
-  /* padding: 34px 16px; */
   padding: 34px 16px 82px 16px;
   width: 100%;
   @media (min-width: 1440px) {
-    /* width: 60%; */
     flex-direction: row;
     column-gap: 0px;
     align-items: flex-start;
@@ -193,11 +180,9 @@ const Card = styled.div`
   border-radius: 10px;
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
   padding: 32px 24px;
-  /* width: 100%; */
   @media (min-width: 1440px) {
     padding: 40px 100px 32px 100px;
     box-shadow: none;
-    /* flex-grow: 1; */
     height: 100%;
     width: 72%;
   }
@@ -233,17 +218,15 @@ const Instruction = styled.div`
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 25px; /* 156.25% */
+  line-height: 25px;
 `;
 
-// const Body = styled.div``;
+
 
 const Next = styled.div`
   background-color: var(--white);
   display: flex;
   justify-content: flex-end;
-  /* justify-content: space-between;
-  align-items: center; */
   width: 100%;
   padding: 16px;
   position: absolute;
@@ -255,14 +238,6 @@ const Next = styled.div`
   }
 `;
 
-// const Back = styled.div`
-//   color: var(--coolGrey);
-//   font-family: Ubuntu;
-//   font-size: 14px;
-//   font-style: normal;
-//   font-weight: 500;
-//   line-height: normal;
-// `;
 
 const NextBtn = styled.button`
   background-color: var(--white);
@@ -282,6 +257,7 @@ const NextBtn = styled.button`
     background: #164a8a;
   }
   @media (min-width: 1440px) {
+    border-radius: 8px;
     font-size: 16px;
     padding: 14px 24px;
     width: 123px;
@@ -291,7 +267,6 @@ const NextBtn = styled.button`
 `;
 
 const Form = styled.form`
-  /* margin-top: 22px; */
   display: flex;
   flex-direction: column;
   row-gap: 16px;

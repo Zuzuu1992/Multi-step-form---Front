@@ -70,12 +70,19 @@ const PlanWrapper = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 24px;
+  @media (min-width: 1440px) {
+    row-gap: 32px;
+  }
 `;
 
 const PlanBox = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 12px;
+  @media (min-width: 1440px) {
+    flex-direction: row;
+    column-gap: 18px;
+  }
 `;
 
 const Option = styled.div<OptionProps>`
@@ -86,9 +93,18 @@ const Option = styled.div<OptionProps>`
   padding: 14px 16px;
   border-radius: 8px;
   background: var(--white, #fff);
+  cursor: pointer;
   border: 1px solid
     ${({ selected }) =>
       selected ? "var(--Purple, #483EFF)" : "var(--lightGrey)"};
+
+  @media (min-width: 1440px) {
+    flex-direction: column;
+    row-gap: 39px;
+    align-items: flex-start;
+    flex-grow: 1;
+    padding: 20px 16px 16px 16px;
+  }
 `;
 
 const Icon = styled.img``;

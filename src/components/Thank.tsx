@@ -26,17 +26,27 @@ const ThankBox = styled.div`
   row-gap: 24px;
   /* margin-top: 79px;
   margin-bottom: 79px; */
+  @media (min-width: 1440px) {
+    row-gap: 32px;
+  }
 `;
 
 const ThankIcon = styled.img`
   width: 56px;
   height: 56px;
+  @media (min-width: 1440px) {
+    width: 80px;
+    height: 80px;
+  }
 `;
 
 const Text = styled.div`
   display: flex;
   flex-direction: column;
   row-gap: 9px;
+  @media (min-width: 1440px) {
+    row-gap: 14px;
+  }
 `;
 
 const BoldThank = styled.p`
@@ -47,6 +57,9 @@ const BoldThank = styled.p`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  @media (min-width: 1440px) {
+    font-size: 32px;
+  }
 `;
 
 const LargeText = styled.p`

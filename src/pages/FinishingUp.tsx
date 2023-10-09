@@ -4,13 +4,27 @@ import Finishing from "../components/Finishing";
 import useActivePage from "../store/useActivePage";
 import { useNavigate } from "react-router-dom";
 import Thank from "../components/Thank";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Background from "../assets/bg-sidebar-mobile.svg";
 
 function FinishingUp() {
   const activePage = useActivePage((state) => state.activePage);
   const [showThank, setShowThank] = useState(false);
   const navigate = useNavigate();
+
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1440);
+
+  const handleResize = () => {
+    setIsDesktop(window.innerWidth >= 1440);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const handleNextClick = () => {
     setShowThank(true);
@@ -34,14 +48,24 @@ function FinishingUp() {
                 </Instruction>
               </Chapter>
               <Finishing />
+              {isDesktop && (
+                <Next>
+                  <Back onClick={handleBackClick}>Go Back</Back>
+                  <NextBtn onClick={handleNextClick} type="submit">
+                    Confirm
+                  </NextBtn>
+                </Next>
+              )}
             </Card>
           </Process>
-          <Next>
-            <Back onClick={handleBackClick}>Go Back</Back>
-            <NextBtn onClick={handleNextClick} type="submit">
-              Confirm
-            </NextBtn>
-          </Next>
+          {!isDesktop && (
+            <Next>
+              <Back onClick={handleBackClick}>Go Back</Back>
+              <NextBtn onClick={handleNextClick} type="submit">
+                Confirm
+              </NextBtn>
+            </Next>
+          )}
         </Option>
       ) : (
         <Option>
@@ -51,6 +75,8 @@ function FinishingUp() {
               style={{
                 paddingTop: "79px",
                 paddingBottom: "79px",
+                display: "flex",
+                alignItems: "center",
               }}
             >
               <Thank />
@@ -73,6 +99,14 @@ const Option = styled.div`
   background-repeat: no-repeat;
   background-size: 100%;
   height: 30%;
+  @media (min-width: 1440px) {
+    background-image: none;
+    background: var(--White, #fff);
+    height: 600px;
+    padding: 16px;
+    border-radius: 15px;
+    align-items: stretch;
+  }
 `;
 
 const Process = styled.div`
@@ -83,6 +117,15 @@ const Process = styled.div`
   /* padding: 34px 16px; */
   padding: 34px 16px 82px 16px;
   width: 100%;
+  @media (min-width: 1440px) {
+    flex-direction: row;
+    column-gap: 0px;
+    align-items: flex-start;
+    padding: 0;
+    height: 100%;
+    justify-content: center;
+    width: auto;
+  }
 `;
 
 const Card = styled.div`
@@ -91,6 +134,12 @@ const Card = styled.div`
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
   padding: 32px 24px;
   width: 100%;
+  @media (min-width: 1440px) {
+    padding: 40px 100px 32px 100px;
+    box-shadow: none;
+    height: 100%;
+    width: 72%;
+  }
 `;
 
 const Chapter = styled.div`
@@ -98,6 +147,10 @@ const Chapter = styled.div`
   flex-direction: column;
   row-gap: 9px;
   margin-bottom: 22px;
+  @media (min-width: 1440px) {
+    margin-bottom: 35px;
+    row-gap: 11px;
+  }
 `;
 
 const Title = styled.div`
@@ -107,6 +160,9 @@ const Title = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  @media (min-width: 1440px) {
+    font-size: 32px;
+  }
 `;
 
 const Instruction = styled.div`
@@ -131,6 +187,12 @@ const Next = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
+  @media (min-width: 1440px) {
+    position: static;
+    padding: 0px;
+    margin-top: 130px;
+    /* padding: 92px 0px 0px 0px; */
+  }
 `;
 
 const Back = styled.div`
@@ -140,6 +202,14 @@ const Back = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    color: var(--Denim, #022959);
+  }
+  @media (min-width: 1440px) {
+    font-size: 16px;
+  }
 `;
 
 const NextBtn = styled.button`
@@ -153,4 +223,17 @@ const NextBtn = styled.button`
   font-weight: 500;
   line-height: normal;
   border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  &:hover {
+    background: #928cff;
+  }
+  @media (min-width: 1440px) {
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 14px 24px;
+    width: 123px;
+    align-self: flex-end;
+    /* margin-top: 92px; */
+  }
 `;
