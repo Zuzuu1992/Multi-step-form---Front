@@ -2,17 +2,18 @@ import styled from "styled-components";
 import { useSelectedPlanStore } from "../store/useSelectedPlanStore";
 import { useAddOnsStore } from "../store/useAddOnsStore";
 import { usePlanStore } from "../store/usePlanStore";
+import { useNavigate } from "react-router-dom";
 
 function Finishing() {
   const { selectedOption } = useSelectedPlanStore();
   const { selectedAddOns } = useAddOnsStore();
   const { period } = usePlanStore();
+  const navigate = useNavigate();
 
   const calculateTotalPrice = () => {
     let planPrice = 0;
     let addOnsPrice = 0;
 
-    // Calculate plan price based on the selectedOption
     if (selectedOption === "arcade") {
       planPrice = period ? 90 : 9;
     } else if (selectedOption === "advanced") {
@@ -21,7 +22,6 @@ function Finishing() {
       planPrice = period ? 150 : 15;
     }
 
-    // Calculate add-ons price based on selectedAddOns
     for (const addOn of selectedAddOns) {
       if (addOn === "Online service") {
         addOnsPrice += period ? 10 : 1;
@@ -32,7 +32,6 @@ function Finishing() {
       }
     }
 
-    // Calculate the total price
     const totalPrice = planPrice + addOnsPrice;
 
     return totalPrice;
@@ -50,33 +49,32 @@ function Finishing() {
   }
 
   function getPlanPrice(option: string, period: boolean) {
-    // Define your plan prices here based on the selectedOption
     const planPrices: { [key: string]: number } = {
       arcade: period ? 90 : 9,
       advanced: period ? 120 : 12,
       pro: period ? 150 : 15,
     };
 
-    // Retrieve the price based on the selectedOption
     const price = planPrices[option] || 0;
 
     return period ? `$${price}/yr` : `$${price}/mo`;
   }
 
   function getAddOnPrice(addOnName: string, period: boolean) {
-    // Define your add-on prices here based on the addOnName
     const addOnPrices: { [key: string]: number } = {
       "Online service": period ? 10 : 1,
       "Larger storage": period ? 20 : 2,
       "Customizable profile": period ? 20 : 2,
-      // Add more add-ons and prices as needed
     };
 
-    // Retrieve the price based on the addOnName
     const price = addOnPrices[addOnName] || 0;
 
     return period ? `+$${price}/yr` : `+$${price}/mo`;
   }
+
+  const handleChange = () => {
+    navigate("/plan");
+  };
 
   return (
     <FinishWrapper>
@@ -88,7 +86,7 @@ function Finishing() {
                 ? getPlanName(selectedOption, period)
                 : "No plan selected"}
             </ChosenPlan>
-            <Change>Change</Change>
+            <Change onClick={handleChange}>Change</Change>
           </LeftSide>
 
           <PriceRight>{getPlanPrice(selectedOption!, period)}</PriceRight>

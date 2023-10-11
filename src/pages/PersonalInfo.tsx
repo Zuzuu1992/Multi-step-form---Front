@@ -7,7 +7,6 @@ import loginSchema from "../loginSchema";
 import { useFormStore } from "../store/useFormStore";
 import useActivePage from "../store/useActivePage";
 import Background from "../assets/bg-sidebar-mobile.svg";
-import BackgroundDesktop from "../assets/bg-sidebar-desktop.svg";
 import { useEffect, useState } from "react";
 
 interface FormData {
@@ -46,7 +45,6 @@ function PersonalInfo() {
   const submitHandler = async (data: FormData) => {
     navigate("/plan");
     setInputInfo(data);
-    console.log(data);
   };
 
   return (
@@ -78,7 +76,7 @@ function PersonalInfo() {
                       setInputInfo({ ...inputInfo, name: e.target.value });
                     },
                   })}
-                  // onBlur={handleInputBlur}
+                  className={errors.name ? "error" : ""}
                 />
               </FillBox>
 
@@ -98,7 +96,7 @@ function PersonalInfo() {
                       setInputInfo({ ...inputInfo, email: e.target.value });
                     },
                   })}
-                  // onBlur={handleInputBlur}
+                  className={errors.email ? "error" : ""}
                 />
               </FillBox>
 
@@ -118,7 +116,7 @@ function PersonalInfo() {
                       setInputInfo({ ...inputInfo, phone: e.target.value });
                     },
                   })}
-                  // onBlur={handleInputBlur}
+                  className={errors.phone ? "error" : ""}
                 />
               </FillBox>
               {!isDesktop && (
@@ -221,8 +219,6 @@ const Instruction = styled.div`
   line-height: 25px;
 `;
 
-
-
 const Next = styled.div`
   background-color: var(--white);
   display: flex;
@@ -237,7 +233,6 @@ const Next = styled.div`
     padding: 92px 0px 0px 0px;
   }
 `;
-
 
 const NextBtn = styled.button`
   background-color: var(--white);
@@ -296,6 +291,20 @@ const Input = styled.input`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover,
+  &:active,
+  &:focus {
+    border-color: var(--Purple, #483eff);
+  }
+
+  &.error {
+    border-color: var(--Red-Errors, #ee374a);
+  }
+
   @media (min-width: 1440px) {
     font-size: 16px;
   }

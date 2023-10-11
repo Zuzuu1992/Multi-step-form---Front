@@ -24,8 +24,6 @@ const ThankBox = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 24px;
-  /* margin-top: 79px;
-  margin-bottom: 79px; */
   @media (min-width: 1440px) {
     row-gap: 32px;
   }
@@ -66,10 +64,9 @@ const LargeText = styled.p`
   color: var(--coolGrey);
   text-align: center;
   font-feature-settings: "clig" off, "liga" off;
-  /* Body (L) */
   font-family: Ubuntu;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 25px; /* 156.25% */
+  line-height: 25px;
 `;

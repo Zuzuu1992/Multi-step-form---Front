@@ -179,36 +179,13 @@ const NumberBox = styled.div`
     border-radius: 10px;
     flex-grow: 1;
     height: 100%;
-
-    /* width: 39%; */
-    height: 100%;
-    /* width: 40%; */
   }
 `;
-
-// const NumberBoxDesktop = styled.div`
-//   display: block;
-//   display: flex;
-//   column-gap: 16px;
-//   @media (min-width: 1440px) {
-//     flex-direction: column;
-//     background-image: url(${BackgroundDesktop});
-//     background-repeat: no-repeat;
-//     padding: 40px 32px;
-//     row-gap: 32px;
-//   }
-// `;
 
 const Number = styled.button`
   border-radius: 50%;
   height: 33px;
   width: 33px;
-  /* border: ${(props) =>
-    props.className === "active" ? "none" : "1px solid white"}; */
-  /* background-color: ${(props) =>
-    props.className === "active" ? "#BEE2FD" : "transparent"};
-  color: ${(props) =>
-    props.className === "active" ? "var(--marineBlue)" : "var(--white)"}; */
   text-align: center;
   font-family: "Ubuntu", sans-serif;
   font-size: 14px;

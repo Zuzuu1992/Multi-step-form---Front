@@ -183,7 +183,6 @@ const Check = styled.input`
   &:checked::before {
     background-color: var(--purplishBlue);
     background-image: url(${Checkmark});
-
     background-position: center;
     background-repeat: no-repeat;
     transform: translate(-1.8px, -1.8px);

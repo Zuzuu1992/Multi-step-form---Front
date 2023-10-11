@@ -38,7 +38,6 @@ const Process = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 34px;
-  /* padding: 34px 16px; */
   padding: 34px 16px 82px 16px;
   width: 100%;
 `;

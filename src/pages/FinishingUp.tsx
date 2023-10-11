@@ -1,3 +1,4 @@
+import axios from "axios";
 import Pagination from "../components/Pagination";
 import styled from "styled-components";
 import Finishing from "../components/Finishing";
@@ -6,11 +7,17 @@ import { useNavigate } from "react-router-dom";
 import Thank from "../components/Thank";
 import { useEffect, useState } from "react";
 import Background from "../assets/bg-sidebar-mobile.svg";
+import { useSelectedPlanStore } from "../store/useSelectedPlanStore";
+import { useFormStore } from "../store/useFormStore";
+import { useAddOnsStore } from "../store/useAddOnsStore";
 
 function FinishingUp() {
   const activePage = useActivePage((state) => state.activePage);
   const [showThank, setShowThank] = useState(false);
   const navigate = useNavigate();
+  const { selectedOption } = useSelectedPlanStore();
+  const { inputInfo } = useFormStore();
+  const { selectedAddOns } = useAddOnsStore();
 
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1440);
 
@@ -26,7 +33,35 @@ function FinishingUp() {
     };
   }, []);
 
+  const sendDataToBackend = async () => {
+    try {
+      const dataToSend = {
+        name: inputInfo.name,
+        email: inputInfo.email,
+        phone: inputInfo.phone,
+        plan: selectedOption,
+        onlineService: selectedAddOns.includes("Online service"),
+        LargerStorage: selectedAddOns.includes("Larger storage"),
+        CustomizableProfile: selectedAddOns.includes("Customizable profile"),
+      };
+
+      const response = await axios.post(
+        "https://multi-step-form-ek9o.onrender.com/api/personalinfo",
+        dataToSend
+      );
+
+      if (response.status === 201) {
+        console.log("Data saved successfully.");
+      } else {
+        console.error("Error saving data to the backend.");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
+
   const handleNextClick = () => {
+    sendDataToBackend();
     setShowThank(true);
   };
 
@@ -114,7 +149,6 @@ const Process = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 34px;
-  /* padding: 34px 16px; */
   padding: 34px 16px 82px 16px;
   width: 100%;
   @media (min-width: 1440px) {
@@ -168,12 +202,11 @@ const Title = styled.div`
 const Instruction = styled.div`
   color: var(--coolGrey);
   font-feature-settings: "clig" off, "liga" off;
-  /* Body (L) */
   font-family: "Ubuntu", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 25px; /* 156.25% */
+  line-height: 25px;
 `;
 
 const Next = styled.div`
@@ -190,8 +223,7 @@ const Next = styled.div`
   @media (min-width: 1440px) {
     position: static;
     padding: 0px;
-    margin-top: 130px;
-    /* padding: 92px 0px 0px 0px; */
+    margin-top: 116px;
   }
 `;
 
@@ -234,6 +266,5 @@ const NextBtn = styled.button`
     padding: 14px 24px;
     width: 123px;
     align-self: flex-end;
-    /* margin-top: 92px; */
   }
 `;

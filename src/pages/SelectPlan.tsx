@@ -15,7 +15,7 @@ interface RectangleProps {
 function SelectPlan() {
   const activePage = useActivePage((state) => state.activePage);
   const { selectedOption } = useSelectedPlanStore();
-  const { period, togglePeriod } = usePlanStore();
+  const { period } = usePlanStore();
   const navigate = useNavigate();
 
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1440);
@@ -87,7 +87,7 @@ const Option = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 34px;
-  position: relative;
+  /* position: relative; */
   background-image: url(${Background});
   background-repeat: no-repeat;
   background-size: 100%;
@@ -107,7 +107,6 @@ const Process = styled.div`
   flex-direction: column;
   align-items: center;
   row-gap: 34px;
-  /* padding: 34px 16px; */
   padding: 34px 16px 82px 16px;
   width: 100%;
   @media (min-width: 1440px) {
@@ -127,7 +126,6 @@ const Card = styled.div`
   box-shadow: 0px 25px 40px -20px rgba(0, 0, 0, 0.1);
   padding: 32px 24px;
   width: 100%;
-  /* margin-bottom: 20px;  */
   @media (min-width: 1440px) {
     padding: 40px 100px 32px 100px;
     box-shadow: none;
@@ -162,12 +160,11 @@ const Title = styled.div`
 const Instruction = styled.div`
   color: var(--coolGrey);
   font-feature-settings: "clig" off, "liga" off;
-  /* Body (L) */
   font-family: "Ubuntu", sans-serif;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 25px; /* 156.25% */
+  line-height: 25px;
 `;
 
 const Next = styled.div<RectangleProps>`
@@ -178,9 +175,6 @@ const Next = styled.div<RectangleProps>`
   align-items: center;
   width: 100%;
   padding: 16px;
-  position: absolute;
-  bottom: 0;
-  right: 0;
   @media (min-width: 1440px) {
     position: static;
     padding: 0px;
@@ -228,6 +222,5 @@ const NextBtn = styled.button`
     padding: 14px 24px;
     width: 123px;
     align-self: flex-end;
-    /* margin-top: 92px; */
   }
 `;
