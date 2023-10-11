@@ -24,6 +24,8 @@ function Pagination({ activePage }: PaginationProps) {
     };
   }, []);
 
+  console.log(activePage);
+
   return (
     <>
       {isDesktop ? (
